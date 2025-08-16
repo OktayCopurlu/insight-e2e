@@ -7,7 +7,9 @@ test("language picker populates from /config", async ({ page }) => {
   await test.step("Given I open the homepage", async () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
-    await expect(page.getByTestId("app-title")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByTestId("app-title")).toBeVisible({
+      timeout: 60_000,
+    });
   });
 
   await test.step("And I can see the language selector", async () => {
@@ -15,7 +17,9 @@ test("language picker populates from /config", async ({ page }) => {
   });
 
   await test.step("Then it lists at least one language option", async () => {
-    options = (await langSelect.locator("option").allTextContents()).map((o) => o.trim());
+    options = (await langSelect.locator("option").allTextContents()).map((o) =>
+      o.trim()
+    );
     expect(options.length).toBeGreaterThan(0);
   });
 

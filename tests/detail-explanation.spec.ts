@@ -8,16 +8,22 @@ test("navigate to detail and see explanation section", async ({ page }) => {
   await test.step("Given I open the homepage", async () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
-    await expect(page.getByTestId("app-title")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByTestId("app-title")).toBeVisible({
+      timeout: 60_000,
+    });
   });
 
   await test.step("And I can see at least one news card", async () => {
-    await expect(page.getByTestId("news-card").first()).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByTestId("news-card").first()).toBeVisible({
+      timeout: 60_000,
+    });
   });
 
   await test.step("When I click the first card", async () => {
     const first = page.getByTestId("news-card").first();
-    listTitle = (await first.getByRole("heading", { level: 2 }).first().textContent())?.trim();
+    listTitle = (
+      await first.getByRole("heading", { level: 2 }).first().textContent()
+    )?.trim();
     await first.click();
   });
 
@@ -33,12 +39,16 @@ test("navigate to detail and see explanation section", async ({ page }) => {
   });
 
   await test.step("And I can see the explanation section", async () => {
-    const explHeading = page.getByRole("heading", { name: /detailed ai explanation/i });
+    const explHeading = page.getByRole("heading", {
+      name: /detailed ai explanation/i,
+    });
     await expect(explHeading).toBeVisible({ timeout: 30_000 });
   });
 
   await test.step("And a generate explanation button may be visible", async () => {
-    const generateBtn = page.getByRole("button", { name: /generate detailed explanation/i });
+    const generateBtn = page.getByRole("button", {
+      name: /generate detailed explanation/i,
+    });
     if (await generateBtn.count()) {
       await expect(generateBtn.first()).toBeVisible();
     }

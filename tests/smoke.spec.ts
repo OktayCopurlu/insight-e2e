@@ -8,7 +8,9 @@ test.describe("Insight Frontend smoke", () => {
       // @ts-ignore
       (globalThis as any).__E2E_LIVE__ = Boolean((window as any).__E2E_LIVE__);
     });
-    page.on("console", (msg) => console.log("[browser]", msg.type(), msg.text()));
+    page.on("console", (msg) =>
+      console.log("[browser]", msg.type(), msg.text())
+    );
     page.on("pageerror", (err) => console.error("[pageerror]", err.message));
     page.on("requestfailed", (req) =>
       console.warn("[requestfailed]", req.url(), req.failure()?.errorText)
@@ -20,16 +22,23 @@ test.describe("Insight Frontend smoke", () => {
 
     await test.step("Given I open the homepage", async () => {
       await page.goto("/");
-      await expect(page.getByTestId("app-title")).toBeVisible({ timeout: 30_000 });
+      await expect(page.getByTestId("app-title")).toBeVisible({
+        timeout: 30_000,
+      });
     });
 
     await test.step("And I can see at least one news card", async () => {
-      await expect(page.getByTestId("news-card").first()).toBeVisible({ timeout: 30_000 });
+      await expect(page.getByTestId("news-card").first()).toBeVisible({
+        timeout: 30_000,
+      });
     });
 
     await test.step("When I click the first card", async () => {
       const first = page.getByTestId("news-card").first();
-      listTitle = (await first.getByRole("heading", { level: 2 }).first().textContent())?.trim() || "";
+      listTitle =
+        (
+          await first.getByRole("heading", { level: 2 }).first().textContent()
+        )?.trim() || "";
       await first.click();
     });
 
@@ -56,11 +65,15 @@ test.describe("Insight Frontend smoke", () => {
     await test.step("Given I open the homepage", async () => {
       await page.setViewportSize({ width: 1280, height: 900 });
       await page.goto("/");
-      await expect(page.getByTestId("app-title")).toBeVisible({ timeout: 30_000 });
+      await expect(page.getByTestId("app-title")).toBeVisible({
+        timeout: 30_000,
+      });
     });
 
     await test.step("Then I can see at least one news card", async () => {
-      await expect(page.getByTestId("news-card").first()).toBeVisible({ timeout: 30_000 });
+      await expect(page.getByTestId("news-card").first()).toBeVisible({
+        timeout: 30_000,
+      });
     });
   });
 });
