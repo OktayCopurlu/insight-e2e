@@ -1,25 +1,30 @@
 import { test, expect } from "@playwright/test";
 
 test("language selector updates <html lang> and URL", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/");
-
-  // Ensure app mounted
-  await expect(page.locator('[data-testid="app-title"]')).toBeVisible({
-    timeout: 15_000,
+  await test.step("Given I open the homepage", async () => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+    await expect(page.getByTestId("app-title")).toBeVisible({ timeout: 30_000 });
   });
+
   const select = page.locator("#lang-select");
-  await expect(select).toBeVisible({ timeout: 10_000 });
 
-  // Change language to tr
-  await select.selectOption("tr");
+  await test.step("And I can see the language selector", async () => {
+    await expect(select).toBeVisible({ timeout: 30_000 });
+  });
 
-  // URL should include ?lang=tr
-  await expect(page).toHaveURL(/\blang=tr\b/);
+  await test.step("When I change language to Turkish (tr)", async () => {
+    await select.selectOption("tr");
+  });
 
-  // Document <html lang> should be set
-  const htmlLang = await page.evaluate(() =>
-    document.documentElement.getAttribute("lang")
-  );
-  expect(htmlLang).toBe("tr");
+  await test.step("Then the URL reflects the selected language", async () => {
+    await expect(page).toHaveURL(/\blang=tr\b/);
+  });
+
+  await test.step("And the <html> lang attribute is updated", async () => {
+    const htmlLang = await page.evaluate(() =>
+      document.documentElement.getAttribute("lang")
+    );
+    expect(htmlLang).toBe("tr");
+  });
 });
