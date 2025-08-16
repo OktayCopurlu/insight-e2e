@@ -1,0 +1,13 @@
+# Playwright artifacts
+playwright-report/
+blob-report/
+.html-report/
+
+# Test results cache
+test-results/
+
+# Node dependencies
+node_modules/
+
+# macOS
+.DS_Store
