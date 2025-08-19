@@ -7,7 +7,7 @@ Browser e2e tests for the Insight frontend. By default, tests stub the BFF endpo
 1. Install deps:
    - From this folder, run: npm install
 2. Start the frontend dev server in another terminal:
-   - cd ../Insight-frontend && npm install && npm run dev
+   - cd ../news-web-app-1 && npm install && npm run dev
    - Frontend default URL is http://localhost:5173; override with FE_URL.
 3. (Optional) start BFF and set BFF_URL:
    - export BFF_URL=http://localhost:4000

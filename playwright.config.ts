@@ -33,7 +33,7 @@ export default defineConfig({
     ? undefined
     : {
         command: "npm run dev -- --port 5173 --strictPort",
-        cwd: "../Insight-frontend",
+  cwd: "../news-web-app-1",
         url: "http://localhost:5173",
         reuseExistingServer: true,
         timeout: 120_000,
